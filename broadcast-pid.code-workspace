@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Shared/starlight_standardizer_node_server"
+		}
+	],
+	"settings": {
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 1000,
+		"editor.tabSize": 2,
+		"editor.wordWrap": "on",
+		"editor.fontSize": 10,
+		"workbench.colorCustomizations": {
+			"tab.activeBorder": "#ff0000",
+			"tab.activeBackground": "#024d21"
+		}
+	}
+}
