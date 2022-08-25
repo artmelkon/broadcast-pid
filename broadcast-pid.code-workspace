@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../../../Shared/starlight_standardizer_node_server"
 		}
 	],
 	"settings": {

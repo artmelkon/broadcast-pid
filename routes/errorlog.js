@@ -6,6 +6,7 @@ const logger = require('../utils/logger');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
+  console.log(process.env.CPU)
   const errorLog = path.join(__dirname, '../error.log');
   access(errorLog, constants.F_OK, err => {
     if(err) {
