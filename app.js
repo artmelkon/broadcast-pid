@@ -1,17 +1,22 @@
 const os = require("os");
+const fs = require("fs");
 const winston = require("winston");
 require("winston-mongodb");
 const { format, transports } = require("winston");
 const { combine, timestamp, printf } = format;
+// const si = require('systeminformation'); // check the docs for systeminformation
 const morgan = require("morgan");
-const chokidar = require("chokidar");
 const express = require("express");
+require('express-async-errors');
 require("dotenv").config();
+
+// listener related exports
+const { dbUri, rootObj } = require("./initialData");
+const launchListener = require('./services/directory-listener')
 
 const app = express();
 
-process.env.CPU = (os.hostname()).split('.')[0]
-const dbUri = require('./db-init');
+process.env.CPU = os.hostname().split(".")[0];
 const uri = dbUri();
 const customFormat = printf(({ level, message, timestamp }) => {
   return `${timestamp} ${level}: ${message}`;
@@ -19,7 +24,7 @@ const customFormat = printf(({ level, message, timestamp }) => {
 
 /* use default code than custom handlers it doesn't create duplicate lines in the log*/
 // console.log(uri)
-console.log(uri)
+console.log(uri);
 winston.add(
   new winston.transports.File({
     filename: "error.log",
@@ -61,9 +66,11 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 require("./utils/routes")(app);
 require("./utils/db-connect")(uri);
-chokidar.watch("/Volumes/sambashare/").on("all", (event, path) => {
-  console.log(event, path);
-});
 
-const PORT = process.env.PORT || 4000;
+setTimeout(() => {
+  console.log("the listener booted");
+  launchListener(rootObj());
+}, 2000);
+
+const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => console.log(`Connected successfully on port: ${PORT}`));

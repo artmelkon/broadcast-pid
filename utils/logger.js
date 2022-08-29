@@ -1,7 +1,8 @@
+const os = require('os');
 const { createLogger, format, transports } = require("winston");
 const { combine, printf, timestamp, prettyPrint } = format;
 
-const dbUri = require('../db-init');
+const { dbUri } = require("../initialData");
 const uri = dbUri();
 
 const customFormat = printf(({ level, timestamp, message }) => {
@@ -20,8 +21,8 @@ const errorLogger = createLogger({
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
-      tryReconnect: true
-    })
+      tryReconnect: true,
+    }),
   ],
   // exceptionHandlers: [ new transports.File({ filename: "error.log", }) ],
   // rejectionHandlers: [ new transports.File({ filename: "error.log", }) ],

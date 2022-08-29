@@ -1,14 +1,9 @@
 const express = require('express')
 const router = express.Router();
 
-router.get('/api/stats/:cpu', (req, res) => {
-  try {
+router.get('/api/stats/:cpu', ((req, res) => {
     const $PID = execSync('pgrep -l "Adobe Photoshop"', {stdio: 'pipe'});
     res.send('PID ' + $PID)
-}
-catch (error) {
-    console.log(error.message);
-}
-})
+}))
 
 module.exports = router;
