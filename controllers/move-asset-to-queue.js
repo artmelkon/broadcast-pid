@@ -22,7 +22,7 @@ const moveAsset = (result) => {
         setTimeout(function () {
           /* Here we will move the asset to queue in *sec interval */
           fs.rename(assetOut, path.join(queue, "/", assetFile), (err) => {
-            if (err) logger.errorLogger.error(err.message, err);
+            if (err) loger.error(err.message, err);
             // /* here we generate asset json file */
             // assetJsonGenerator(assetFile, assetOut);
           });

@@ -10,12 +10,12 @@ router.get('/', (req, res, next) => {
   access(errorLog, constants.F_OK, err => {
     if(err) {
       console.error(`${errorLog} does not exists!`);
-      logger.errorLogger.error(err.message, err)
+      logger.error(err.message, err)
       res.status(404).send(`${errorLog} does not exists!`);
     }
     readFile(errorLog, 'utf8', (err, log) => {
       if(err) {
-        logger.errorLogger.error(err.massage, err);
+        logger.error(err.massage, err);
         return;
       }
       res.status(200).send(log)

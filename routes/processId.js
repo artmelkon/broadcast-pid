@@ -7,6 +7,8 @@ const adobeApp = {
 };
 
 router.get('/:app', (req, res, next) => {
+  throw new Error('Unabel get process id');
+  
   const _pid = parseInt(execSync(`pgrep -i "${req.params.app}"`));
   adobeApp.pid = _pid;
   res.send(adobeApp);
